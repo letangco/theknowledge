@@ -1,0 +1,1 @@
+function (){var a=db.chatgroups.find({}).toArray();a.map(function(a){var b=a.users;"undefined"!=typeof b&&null!=b&&(b.map(function(a,c){var d=db.users.findOne({cuid:a});"undefined"!=typeof d&&null!=d&&(b[c]={cuid:a,fullName:d.fullName||d.firstName||d.lastName})}),db.chatgroups.update({cuid:a.cuid},{$set:{users:b}}))})}

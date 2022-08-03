@@ -1,0 +1,16 @@
+{
+  "restartable": "rs",
+  "ignore": [
+    ".git",
+    "node_modules/**/node_modules",
+    "server/docs",
+    "server/scripts/mongo_scripts/*",
+    "server/*.zip"
+  ],
+  "verbose": true,
+  "watch": ["server", "socket"],
+  "env": {
+    "NODE_ENV": "development"
+  },
+  "ext": "js json"
+}

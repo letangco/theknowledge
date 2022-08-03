@@ -1,0 +1,17 @@
+export const ROOM_ENDPOINT = process.env.ROOM_ENDPOINT;
+export const ROOM_SECRET = process.env.ROOM_SECRET;
+export const ROOM_ORIGIN_VERSION = process.env.ROOM_ORIGIN_VERSION;
+export const ROOM_ORIGIN_SERVER_NAME = process.env.ROOM_ORIGIN_SERVER_NAME;
+export const ROOM_HOOK_CALLBACK_URL = process.env.ROOM_HOOK_CALLBACK_URL;
+export const ROOM_HOOK_RECORDED_CALLBACK_URL = process.env.ROOM_HOOK_RECORDED_CALLBACK_URL;
+export const ROOM_LOGOUT_BASE_URL = process.env.ROOM_LOGOUT_BASE_URL;
+export const ENDPOINTS = JSON.parse(process.env.ENDPOINTS || '[]');
+export const ROOM_LOGO = process.env.ROOM_LOGO;
+export const ROOM_MOBILE_LOGO = process.env.ROOM_MOBILE_LOGO;
+export const ROOM_CLIENT_TITLE = process.env.ROOM_CLIENT_TITLE;
+export const ROOM_FAVICON = process.env.ROOM_FAVICON;
+export const ROOM_PLAYBACK_LOGO = process.env.ROOM_PLAYBACK_LOGO;
+export const ROOM_PLAYBACK_COPYRIGHT = process.env.ROOM_PLAYBACK_COPYRIGHT;
+export const ROOM_PRE_SLIDE = process.env.ROOM_PRE_SLIDE;
+export const ROOM_WELCOME_MESSAGE = process.env.ROOM_WELCOME_MESSAGE;
+export const EDUTEK_CONTACT_MAIL = process.env.EDUTEK_CONTACT_MAIL;

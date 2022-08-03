@@ -1,0 +1,69 @@
+version: "3.7"
+
+services:
+  app:
+    build: ./
+    container_name: tesse-backend
+    volumes:
+      - .:/app
+    tty: true
+    command:
+      - /bin/bash
+    ports:
+      - 8001:8001
+      - 8009:8009
+    expose:
+      - 8001
+      - 8009
+    links:
+      - redis:5.0.7-alpine
+      - elasticsearch:2.4.4-alpine
+      - rabbitmq:3.8.2-management-alpine
+      - mongo:3.4.23
+  mongo:
+    image: mongo:3.4.23
+    container_name: tesse-mongo
+    restart: always
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME_FILE: /run/secrets/mongo/MONGO_INITDB_ROOT_USERNAME
+      MONGO_INITDB_ROOT_PASSWORD_FILE: /run/secrets/mongo/MONGO_INITDB_ROOT_PASSWORD
+      MONGO_INITDB_PASSWORD_FILE: /run/secrets/mongo/MONGO_INITDB_PASSWORD
+      MONGO_INITDB_USERNAME_FILE: /run/secrets/mongo/MONGO_INITDB_USERNAME
+      MONGO_INITDB_DATABASE_FILE: /run/secrets/mongo/MONGO_INITDB_DATABASE
+    volumes:
+      - ./mongo/data:/data/db
+      - ./mongo/secrets:/run/secrets/mongo
+      - ./mongo/entry-scripts:/docker-entrypoint-initdb.d
+  redis:
+    image: redis:5.0.7-alpine
+    container_name: tesse-redis
+    restart: always
+    volumes:
+      - ./redis/redis.conf:/usr/local/etc/redis/redis.conf
+      - ./redis/data:/data
+    command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
+    ports:
+      - 6479:6479
+  elasticsearch:
+    image: elasticsearch:2.4.4-alpine
+    container_name: tesse-elasticsearch
+    restart: always
+    volumes:
+      - ./elastic/data:/usr/share/elasticsearch/data
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    ports:
+      - 9200:9200
+  rabbitmq:
+    image: rabbitmq:3.8.2-management-alpine
+    container_name: tesse-rabbitmq
+    volumes:
+      - ./rabbitmq/rabbitmq_management.conf:/etc/rabbitmq/rabbitmq.conf
+      - ./rabbitmq/data:/var/lib/rabbitmq
+    ports:
+      - 5672:5672
+      - 15672:15672

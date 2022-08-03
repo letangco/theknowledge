@@ -1,0 +1,1 @@
+function (e){var a=db.chatgroups.findOne({cuid:e});return a.users&&a.users.map(function(e){var r=db.users.findOne({cuid:e.cuid}),u={cuid:r.cuid,avatar:r.avatar,fullName:r.fullName,firstName:r.firstName,lastName:r.lastName,userName:r.userName,online:r.online,expert:r.expert,priceCall:r.priceCall,priceChat:r.priceChat};a.userInfo[r.cuid]=u}),a}
